@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTHN</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --paper: #FFFEF9;
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --rule: #d4d0c8;
+      --accent: #8b0000;
+    }
+
+    body {
+      font-family: 'EB Garamond', 'Times New Roman', serif;
+      background: #e8e4dd;
+      color: var(--ink);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Landing hero */
+    .landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .landing h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25em;
+    }
+
+    .landing .ticker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .landing .tagline {
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 0.5rem;
+    }
+
+    .download-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1em 2.5em;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--accent);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Paper section */
+    .paper-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 4rem 1rem 6rem;
+    }
+
+    .paper {
+      background: var(--paper);
+      max-width: 720px;
+      width: 100%;
+      padding: clamp(2rem, 6vw, 4rem) clamp(2rem, 8vw, 5rem);
+      box-shadow: 0 2px 40px rgba(0,0,0,0.12);
+    }
+
+    .paper-header {
+      text-align: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2rem;
+    }
+
+    .paper-header h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .paper-header .authors {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .paper-header .institution {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .paper-header .date {
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .abstract {
+      background: #f7f6f2;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--rule);
+    }
+
+    .abstract h3 {
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+      color: var(--muted);
+    }
+
+    .abstract p {
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+
+    .section h3 .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-right: 0.5em;
+    }
+
+    .section p {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section .equation {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      background: #f7f6f2;
+      color: var(--muted);
+    }
+
+    .section .table-wrapper {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .section table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .section th, .section td {
+      padding: 0.6em 1em;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .references {
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .references h3 {
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .references ol {
+      padding-left: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .references li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footnote {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 3rem;
+      font-style: italic;
+    }
+
+    .peer-review {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 600px) {
+      .paper { padding: 1.5rem; }
+      .abstract { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="landing">
+    <h1>NTHN</h1>
+    <div class="ticker">v1.0.0</div>
+    <p class="tagline">Networked Trustless Hashgraph Nodes</p>
+    <p style="font-size: 0.85rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; margin-bottom: 3rem;">Persistent state abstraction for distributed systems</p>
+    <a href="#paper" class="download-btn">Read the Paper</a>
+    <div class="scroll-hint">Scroll to read</div>
+  </section>
+
+  <section class="paper-wrapper" id="paper">
+    <article class="paper">
+
+      <header class="paper-header">
+        <h2>NTHN: A Framework for Persistent State Abstraction in Distributed Systems</h2>
+        <p class="authors">Heathen</p>
+        <p class="institution">heathen@nthn.org</p>
+        <p class="date">March 2026 &middot; Pre-print</p>
+      </header>
+
+      <div class="abstract">
+        <h3>Abstract</h3>
+        <p>We present NTHN (Networked Trustless Hashgraph Nodes), a framework for persistent state abstraction in distributed systems. Building on foundational work in Byzantine fault tolerance [1], distributed consensus [2], and formal verification of concurrent systems [3], we introduce a novel architecture in which system state is maintained without explicit functional commitment. We formalize the properties of this approach, derive correctness bounds under standard assumptions, and present empirical results from controlled deployment. Our findings suggest that the complete absence of specified behavior may itself constitute a form of</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">1.</span> Introduction</h3>
+        <p>The proliferation of distributed systems over the past two decades has produced a rich landscape of coordination primitives, consensus protocols, and state management frameworks. From replicated state machines to conflict-free data structures, the design space has expanded considerably. Yet a fundamental question remains underexplored in the literature: what happens when you remove all of it?</p>
+        <p>Existing systems operate under an implicit assumption that the architecture must <em>do something</em>. Whether through data replication, event processing, access control, or query resolution, systems are expected to justify their existence through mechanism. This expectation, which we term the <em>utility imperative</em>, has gone largely unchallenged in both academic and industrial contexts.</p>
+        <p>NTHN challenges it directly. We propose a system whose design is complete at the moment of deployment. There are no scheduled updates, no configuration parameters, no extensibility hooks, and no planned integrations. The system is finished. This paper describes what was built, which is</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">2.</span> Background and Related Work</h3>
+        <p>Previous work in minimal-complexity system design has been largely informal. The UNIX philosophy (McIlroy, 1978) advocated for programs that "do one thing well," but did not explore the limiting case. More recently, serverless architectures have reduced the operational surface of deployed systems, though they retain functional expectations. No prior work has formally committed to the complete absence of a value proposition.</p>
+        <p>Our work is most closely related to the theoretical framework proposed by Lamport (1998) on the nature of distributed consensus, and to Brewer's (2000) insight that system guarantees are fundamentally constrained by trade-offs. We extend this lineage by asking whether a system that guarantees <em>nothing in particular</em> exhibits the same</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">3.</span> System Architecture</h3>
+        <p>NTHN is deployed as a single persistent process with no external dependencies. The complete system architecture is presented in Figure 1.</p>
+        <div class="equation" style="padding: 2rem 1rem;">
+          <p style="font-size: 0.75rem; margin-bottom: 1.5rem; color: var(--muted);">Figure 1. Complete system architecture of NTHN.</p>
+          <svg viewBox="0 0 500 220" width="100%" style="max-width: 460px; margin: 0 auto; display: block;">
+            <!-- boxes -->
+            <rect x="30" y="20" width="120" height="50" fill="none" stroke="#c8c4bc" stroke-width="1.5" rx="2"/>
+            <rect x="190" y="20" width="120" height="50" fill="none" stroke="#c8c4bc" stroke-width="1.5" rx="2"/>
+            <rect x="350" y="20" width="120" height="50" fill="none" stroke="#c8c4bc" stroke-width="1.5" rx="2"/>
+            <rect x="110" y="120" width="120" height="50" fill="none" stroke="#c8c4bc" stroke-width="1.5" rx="2"/>
+            <rect x="270" y="120" width="120" height="50" fill="none" stroke="#c8c4bc" stroke-width="1.5" rx="2"/>
+            <!-- arrows -->
+            <line x1="150" y1="45" x2="190" y2="45" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <line x1="310" y1="45" x2="350" y2="45" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <line x1="90" y1="70" x2="170" y2="120" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <line x1="250" y1="70" x2="250" y2="120" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <line x1="410" y1="70" x2="330" y2="120" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <line x1="230" y1="145" x2="270" y2="145" stroke="#c8c4bc" stroke-width="1" marker-end="url(#arrow)"/>
+            <!-- dotted line to nowhere -->
+            <line x1="330" y1="170" x2="330" y2="210" stroke="#c8c4bc" stroke-width="1" stroke-dasharray="4,4"/>
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#c8c4bc"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+        <p>The system exposes no API surface, accepts no input, and produces no output beyond a periodic liveness signal. There is no configuration file. There are no environment variables. The runtime is not extensible. A complete description of the system's components follows in</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">4.</span> Resource Allocation</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Allocation</th>
+                <th>Schedule</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>State persistence layer</td>
+                <td>40%</td>
+                <td>At deployment</td>
+                <td>Maintains state</td>
+              </tr>
+              <tr>
+                <td>Consensus overhead</td>
+                <td>25%</td>
+                <td>Ongoing</td>
+                <td>Achieves consensus</td>
+              </tr>
+              <tr>
+                <td>Liveness signal</td>
+                <td>20%</td>
+                <td>Periodic</td>
+                <td>Confirms liveness</td>
+              </tr>
+              <tr>
+                <td>Reserved</td>
+                <td>15%</td>
+                <td>Unscheduled</td>
+                <td>Reserved</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">5.</span> Governance</h3>
+        <p>The governance model for NTHN is</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">6.</span> Roadmap</h3>
+        <div class="equation">
+          &nbsp;
+        </div>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">7.</span> Risk Factors</h3>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">8.</span> Security Audit</h3>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">9.</span> Formal Verification</h3>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="section">
+        <h3><span class="num">10.</span> Conclusion</h3>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="references">
+        <h3>References</h3>
+        <ol>
+          <li>Lamport, L., Shostak, R., Pease, M. "The Byzantine Generals Problem." <em>ACM Transactions on Programming Languages and Systems</em>, 4(3), 382-401, 1982.</li>
+          <li>Nakamoto, S. "Bitcoin: A Peer-to-Peer Electronic Cash System." 2008.</li>
+          <li>Milner, R. "Communicating and Mobile Systems: The Pi-Calculus." <em>Cambridge University Press</em>, 1999.</li>
+          <li>McIlroy, M.D. "UNIX Time-Sharing System: Foreword." <em>The Bell System Technical Journal</em>, 57(6), 1978.</li>
+          <li>Lamport, L. "The Part-Time Parliament." <em>ACM Transactions on Computer Systems</em>, 16(2), 133-169, 1998.</li>
+          <li>Brewer, E. "Towards Robust Distributed Systems." <em>Proceedings of the 19th ACM Symposium on Principles of Distributed Computing</em>, 2000.</li>
+          <li>Paul, R. "End The Fed." <em>Grand Central Publishing</em>, 2009.</li>
+          <li>von Mises, L. "Human Action: A Treatise on Economics." <em>Yale University Press</em>, 1949.</li>
+          <li>Rothbard, M. "What Has Government Done to Our Money?" <em>Ludwig von Mises Institute</em>, 1963.</li>
+          <li>&nbsp;</li>
+          <li>&nbsp;</li>
+        </ol>
+      </div>
+
+      <div class="peer-review">
+        Peer Review Status:
+      </div>
+
+      <p class="footnote">&nbsp;</p>
+
+      <div style="border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.5rem; text-align: center;">
+        <p style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); letter-spacing: 0.05em;">
+          <a href="https://x.com/heathenft" style="color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule);">@heathenft</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://x.com/loserlabs" style="color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule);">@loserlabs</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://x.com/joinFXN" style="color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule);">@joinFXN</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://x.com/mirra" style="color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule);">@mirra</a>
+        </p>
+      </div>
+
+    </article>
+  </section>
+
+</body>
+</html>
